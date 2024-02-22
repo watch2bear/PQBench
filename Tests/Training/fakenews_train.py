@@ -11,7 +11,7 @@ from sklearn.metrics import classification_report, accuracy_score
 
 # datasets: https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data
 # code_notebook: https://www.kaggle.com/code/elenasm/fake-news-detection-using-tf-idf
-data = pd.read_csv('/Users/xyyang/fakenews/WELFake_Dataset.csv')
+data = pd.read_csv('/fakenews/WELFake_Dataset.csv')
 data=data.dropna()
 X=data[['title','text']]
 y=data['label']
@@ -35,7 +35,7 @@ from skl2onnx.common.data_types import StringTensorType
 from skl2onnx import to_onnx
 onx1 = to_onnx(model1, initial_types=[("title", StringTensorType([None, 1])), ("text", StringTensorType([None, 1]))])
 onx2 = to_onnx(model2, initial_types=[("title", StringTensorType([None, 1])), ("text", StringTensorType([None, 1]))])
-with open('/Users/xyyang/fakenews/fakenews_nb.onnx', "wb") as f:
+with open('/fakenews/fakenews_nb.onnx', "wb") as f:
     f.write(onx1.SerializeToString())
-with open('/Users/xyyang/fakenews/fakenews_svm.onnx', "wb") as f:
+with open('/fakenews/fakenews_svm.onnx', "wb") as f:
     f.write(onx2.SerializeToString())
